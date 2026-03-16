@@ -5,7 +5,7 @@ const PAY_PER_MATRIX = 2000;
 
 // --- STATE VARIABLES ---
 let blockEarnings = 0;
-let totalEarningsGlobal = 20000; 
+let totalEarningsGlobal = 10000; 
 let timerInterval;
 let matrixStartTime = 0;
 let currentTargetCount = 0; 
@@ -88,7 +88,7 @@ function toggleSubmitButton() {
 }
 
 function startExperiment() {
-    totalEarningsGlobal = 25000; 
+    totalEarningsGlobal = 10000; 
     detailedLog = []; 
     
     // RANDOMLY SELECT THE 1 TASK FOR THIS PARTICIPANT
