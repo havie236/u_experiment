@@ -27,17 +27,9 @@ const TASK_TYPES = [
     },
     { 
         id: 'letters', 
-        instruction: "Count the letters 'E' and 'F'.", 
-        target: 'E/F', 
-        generator: (isTarget) => {
-            if (isTarget) {
-                // Randomly pick 'E' or 'F' to be the target to count
-                return Math.random() > 0.5 ? 'E' : 'F';
-            }
-            // Distractor letters that are NOT 'E' or 'F'
-            const distractors = ['T', 'H', 'L', 'Z', 'V', 'N', 'X'];
-            return distractors[Math.floor(Math.random() * distractors.length)];
-        }
+        instruction: "Count the letter 'E'.", // Count the number of letter 'E'
+        target: 'E', 
+        generator: (isTarget) => isTarget ? 'E' : 'F' 
     },
     { 
         id: 'shapes', 
