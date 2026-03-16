@@ -5,7 +5,7 @@ const PAY_PER_MATRIX = 2000;
 
 // --- STATE VARIABLES ---
 let blockEarnings = 0;
-let totalEarningsGlobal = 25000; 
+let totalEarningsGlobal = 20000; 
 let timerInterval;
 let matrixStartTime = 0;
 let currentTargetCount = 0; 
