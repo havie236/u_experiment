@@ -33,7 +33,7 @@
                 </div>
             </div>
 
-            <p>You will receive <strong>20,000 VND</strong> for participating in this experiment, plus an additional <strong>2,000 VND</strong> for each correct answer.</p>
+            <p>You will receive <strong>2,000 VND</strong> for each correct answer.</p>
             <p>The experiment will take approximately <strong>10 minutes</strong> to complete. You may stop at any time without penalty.</p>
         </div>
         
@@ -65,18 +65,19 @@
         </div>
 
         <hr>
-        <button id="btn-stop-working" onclick="stopEarly()" class="leisure-btn">Stop Working</button>
+        <button id="btn-stop-working" onclick="stopEarly()" class="leisure-btn">End Experiment & Next Step</button>
     </div>
 
     <div id="screen-end" class="screen hidden">
         <h2>Experiment Complete</h2>
-        <p>Thank you for your participation.</p>
+        <p>Thank you for your participation. Please submit your results to see your final earnings.</p>
         
-        <h3 style="color: #0056b3; margin: 20px 0;">
+        <h3 id="earnings-display-area" style="color: #0056b3; margin: 20px 0; display: none;">
             Total Earnings: <span id="final-total-earnings">0</span> VND
         </h3>
         
-        <button id="save-data-btn" onclick="saveDataToCloud()" style="margin-bottom: 10px; padding: 15px 30px; font-size: 18px; background-color: #28a745; color: white; border: none; border-radius: 6px; cursor: pointer;">Submit My Results</button>
+        <button id="save-data-btn" onclick="saveDataToCloud()" style="margin-bottom: 10px; padding: 15px 30px; font-size: 18px; background-color: #28a745; color: white; border: none; border-radius: 6px; cursor: pointer;">Submit Result & Reveal Earnings</button>
+        
         <button id="backup-download-btn" onclick="downloadCSV()" style="display: none; background-color: #6c757d; color: white; margin-bottom: 40px; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer;">Backup: Download CSV</button>
         
         <p id="save-status-msg" style="color: #28a745; font-weight: bold; display: none; margin-bottom: 40px; font-size: 18px;">✅ Data saved successfully! You may close this tab.</p>
