@@ -296,7 +296,7 @@ function saveDataToCloud() {
     saveBtn.disabled = true;
     saveBtn.style.opacity = "0.5";
 
-    // Updated fetch request to prevent CORS blocking
+    // Send data to Google Sheets
     fetch(GOOGLE_SCRIPT_URL, {
         method: "POST",
         headers: {
@@ -305,14 +305,22 @@ function saveDataToCloud() {
         body: JSON.stringify(detailedLog)
     })
     .then((response) => {
+        // Hide the save button and show success message
         saveBtn.style.display = "none";
         document.getElementById('save-status-msg').style.display = "block";
+        
+        // REVEAL THE EARNINGS HERE!
+        document.getElementById('earnings-display-area').style.display = "block";
     })
     .catch((error) => {
         console.error("Error saving data:", error);
         alert("There was an error saving your data to the cloud. Please download the backup CSV file instead.");
+        
         saveBtn.innerText = "Error Saving";
         document.getElementById('backup-download-btn').style.display = "inline-block";
+        
+        // Reveal earnings even if there is an error, so they aren't left guessing
+        document.getElementById('earnings-display-area').style.display = "block";
     });
 }
 
