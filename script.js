@@ -4,7 +4,7 @@ const BLOCK_DURATION_SEC = 10 * 60; // 10 minutes
 const PAY_PER_MATRIX = 2000;        // 2,000 VND
 
 // --- STATE VARIABLES ---
-let participantId = "";
+let participantId = ""; // Unique ID for the participant
 let blockEarnings = 0;
 let totalEarningsGlobal = 0; // Starts at 0 VND
 let timerInterval;
@@ -16,7 +16,7 @@ let finalBlockDuration = 0;
 let matrixTabSwitches = 0;    
 let matrixSwitchHistory = []; 
 let detailedLog = []; 
-let activeTask = null; // Will hold the randomly selected task
+let activeTask = null; 
 
 // --- TASKS DEFINITIONS ---
 const TASK_TYPES = [
@@ -87,9 +87,7 @@ function startExperiment() {
     // GENERATE UNIQUE PARTICIPANT ID (e.g., P_4F8A9B)
     participantId = "P_" + Math.random().toString(36).substr(2, 6).toUpperCase();
     
-    // RANDOMLY SELECT THE 1 TASK
     activeTask = TASK_TYPES[Math.floor(Math.random() * TASK_TYPES.length)];
-    
     setupBlockIntro();
 }
 
@@ -109,7 +107,6 @@ function setupBlockIntro() {
     showScreen('screen-block-intro');
 }
 
-// --- TASK LOGIC ---
 function startBlock() {
     showScreen('screen-task');
     blockEarnings = 0; 
@@ -133,8 +130,6 @@ function generateMatrix() {
 
     const gridSize = 8;
     const totalCells = gridSize * gridSize;
-
-    // Standardized cell widths for all tasks
     let cellWidth = '40px';
     let cellHeight = '40px';
     
@@ -152,7 +147,6 @@ function generateMatrix() {
         cell.style.width = cellWidth;
         cell.style.height = cellHeight;
         
-        // Custom font sizing based on the task type
         if (activeTask.id === 'shapes') {
             cell.style.fontSize = '24px'; 
         } else if (activeTask.id === 'letters') {
@@ -185,10 +179,10 @@ function checkAnswer() {
     const historyString = matrixSwitchHistory.join(" | ");
 
     detailedLog.push({
-        participant_id: participantId,
+        participant_id: participantId, // ID INCLUDED HERE
         attempt_id: attemptGlobalCounter,
-        block_number: 1, // Only 1 block in baseline
-        condition: 'Baseline', // Fixed condition label
+        block_number: 1, 
+        condition: 'Baseline', 
         task_type: activeTask.id, 
         user_guess: userInput,
         actual_answer: currentTargetCount,
@@ -200,7 +194,6 @@ function checkAnswer() {
         timestamp: new Date().toISOString()
     });
 
-    // --- FEEDBACK LOGIC ---
     if (isCorrect) {
         blockEarnings += PAY_PER_MATRIX; 
         updateEarningsUI(); 
@@ -241,6 +234,7 @@ function logAbandonedAttempt(reason) {
     attemptGlobalCounter++;
 
     detailedLog.push({
+        participant_id: participantId, // ID INCLUDED HERE
         attempt_id: attemptGlobalCounter,
         block_number: 1,
         condition: 'Baseline',
@@ -268,7 +262,6 @@ function endBlock(reason) {
         alert("Time is up! Please submit your data on the next screen.");
     }
 
-    // APPEND N/A TO ALL ROWS FOR THE REMOVED SURVEYS SO GOOGLE SHEETS STAYS ALIGNED
     detailedLog.forEach(row => {
         row.block_total_duration = finalBlockDuration.toFixed(2);
         row.satisfaction = "N/A";
@@ -289,7 +282,6 @@ function showFinalResults() {
     document.getElementById('final-total-earnings').innerText = totalEarningsGlobal.toLocaleString();
 }
 
-// --- CLOUD SAVE LOGIC ---
 function saveDataToCloud() {
     if (detailedLog.length === 0) { 
         alert("No data to save."); 
@@ -301,7 +293,6 @@ function saveDataToCloud() {
     saveBtn.disabled = true;
     saveBtn.style.opacity = "0.5";
 
-    // Send data to Google Sheets
     fetch(GOOGLE_SCRIPT_URL, {
         method: "POST",
         headers: {
@@ -310,21 +301,15 @@ function saveDataToCloud() {
         body: JSON.stringify(detailedLog)
     })
     .then((response) => {
-        // Hide the save button and show success message
         saveBtn.style.display = "none";
         document.getElementById('save-status-msg').style.display = "block";
-        
-        // REVEAL THE EARNINGS HERE!
         document.getElementById('earnings-display-area').style.display = "block";
     })
     .catch((error) => {
         console.error("Error saving data:", error);
         alert("There was an error saving your data to the cloud. Please download the backup CSV file instead.");
-        
         saveBtn.innerText = "Error Saving";
         document.getElementById('backup-download-btn').style.display = "inline-block";
-        
-        // Reveal earnings even if there is an error, so they aren't left guessing
         document.getElementById('earnings-display-area').style.display = "block";
     });
 }
@@ -343,8 +328,7 @@ function downloadCSV() {
     ];
 
     const rows = detailedLog.map(row => [
-        row.participant_id, row.attempt_id, row.block_number, row.condition, row.task_type,
-        row.attempt_id, row.block_number, row.condition, row.task_type, 
+        row.participant_id, row.attempt_id, row.block_number, row.condition, row.task_type, 
         row.is_correct, row.user_guess, row.actual_answer, row.time_spent_seconds, 
         row.tab_switches_count, row.switch_history, row.block_total_duration, 
         row.note || "", row.satisfaction, row.boredom, row.timestamp,
