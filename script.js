@@ -4,6 +4,7 @@ const BLOCK_DURATION_SEC = 10 * 60; // 10 minutes
 const PAY_PER_MATRIX = 2000;        // 2,000 VND
 
 // --- STATE VARIABLES ---
+let participantId = "";
 let blockEarnings = 0;
 let totalEarningsGlobal = 0; // Starts at 0 VND
 let timerInterval;
@@ -80,10 +81,13 @@ function toggleSubmitButton() {
 }
 
 function startExperiment() {
-    totalEarningsGlobal = 0; // Reset balance to 0 
+    totalEarningsGlobal = 0; 
     detailedLog = []; 
     
-    // RANDOMLY SELECT THE 1 TASK FOR THIS PARTICIPANT
+    // GENERATE UNIQUE PARTICIPANT ID (e.g., P_4F8A9B)
+    participantId = "P_" + Math.random().toString(36).substr(2, 6).toUpperCase();
+    
+    // RANDOMLY SELECT THE 1 TASK
     activeTask = TASK_TYPES[Math.floor(Math.random() * TASK_TYPES.length)];
     
     setupBlockIntro();
@@ -181,6 +185,7 @@ function checkAnswer() {
     const historyString = matrixSwitchHistory.join(" | ");
 
     detailedLog.push({
+        participant_id: participantId,
         attempt_id: attemptGlobalCounter,
         block_number: 1, // Only 1 block in baseline
         condition: 'Baseline', // Fixed condition label
@@ -328,7 +333,7 @@ function downloadCSV() {
     if (detailedLog.length === 0) return;
     
     const headers = [
-        "Attempt_ID", "Block", "Condition", "Task_Type", 
+        "Participant_ID", "Attempt_ID", "Block", "Condition", "Task_Type", 
         "Is_Correct", "User_Guess", "Actual_Answer", "Time_Spent_Sec", 
         "Switch_Count", "Switch_History", 
         "Block_Duration_Total", "Note",
@@ -338,6 +343,7 @@ function downloadCSV() {
     ];
 
     const rows = detailedLog.map(row => [
+        row.participant_id, row.attempt_id, row.block_number, row.condition, row.task_type,
         row.attempt_id, row.block_number, row.condition, row.task_type, 
         row.is_correct, row.user_guess, row.actual_answer, row.time_spent_seconds, 
         row.tab_switches_count, row.switch_history, row.block_total_duration, 
