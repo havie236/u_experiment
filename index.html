@@ -19,18 +19,22 @@
         
         /* GIAO DIỆN BẢNG SỐ CLASSIC GIỐNG HÌNH CỦA GIÁO SƯ */
         .matrix-wrapper { text-align: center; margin: 20px 0; }
-        #matrix-container { 
+        #matrix-container, #practice-matrix-container { 
             display: inline-block; 
             background-color: #e8e9db; 
             border: 1px solid #000;    
-            padding: 30px 50px; 
+            padding: 25px 40px; 
             font-family: 'Courier New', Courier, monospace; 
-            font-size: 24px;           
-            letter-spacing: 3px;       
-            line-height: 1.8;          
+            font-size: 22px;           /* Thu nhỏ chữ lại một tẹo */
+            letter-spacing: 1px;       /* Ép các số xích lại gần nhau giống bản gốc */
+            line-height: 1.4;          /* Ép các dòng xích lại gần nhau */
             text-align: left;          
         }
-        .matrix-row { margin: 0; padding: 0; }
+        .matrix-row { 
+            margin: 0; 
+            padding: 0; 
+            white-space: nowrap;       /* Khóa cứng không cho rớt dòng */
+        }
     </style>
 </head>
 <body>
