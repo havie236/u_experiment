@@ -15,7 +15,7 @@
         .btn:disabled { background-color: #ccc; cursor: not-allowed; }
         .form-group { margin-bottom: 20px; text-align: left; }
         .form-group label { display: block; font-weight: bold; margin-bottom: 8px; }
-        .form-group select, .form-group input { width: 100%; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        .form-group select, .form-group input, .form-group textarea { width: 100%; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-family: inherit; }
         
         /* GIAO DIỆN BẢNG SỐ CLASSIC GIỐNG HÌNH CỦA GIÁO SƯ */
         .matrix-wrapper { text-align: center; margin: 20px 0; }
@@ -215,6 +215,12 @@
                 <option value="1">1</option><option value="2">2</option><option value="3">3</option>
                 <option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option>
             </select>
+        </div>
+
+        <div class="form-group">
+            <label>4. Why did you decide to stop working?</label>
+            <div style="font-size: 14px; color: #666; margin-bottom: 10px;">(Or if time ran out, how did you feel about the task?)</div>
+            <textarea id="post-stop-reason" rows="3" placeholder="Please type your reason here..." style="resize: vertical;"></textarea>
         </div>
 
         <button class="btn" onclick="submitPostSurvey()" style="width: 100%;">Finish Experiment</button>
