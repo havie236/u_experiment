@@ -21,11 +21,19 @@
         
         /* GIAO DIỆN BẢNG SỐ CLASSIC Y NHƯ HÌNH MẪU */
         #screen-task {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            max-width: 100% !important;
+            margin: 0;
+            border-radius: 0;
             background-color: #ececde; /* Màu be xám giống hình */
-            max-width: 900px;
-            border: none;
-            box-shadow: none;
-            padding: 20px;
+            padding: 50px;
+            box-sizing: border-box;
+            z-index: 9999; /* Đè lên mọi giao diện khác */
+            overflow-y: auto;
         }
         .timer-box {
             display: inline-block;
