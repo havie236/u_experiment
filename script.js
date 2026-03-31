@@ -139,7 +139,9 @@ function startRound2() {
     }
 
     // Ghim trực tiếp câu treatment lên trên dòng hướng dẫn
-    document.getElementById('task-top-text').innerHTML = treatmentPhrase + "You can count zeros as long as you want, up to 60 minutes.<br>The remaining time is shown in the upper right hand corner.";
+    document.getElementById('task-top-text').innerHTML = "You can count zeros as long as you want, up to 60 minutes.<br>" + 
+        "The remaining time is shown in the upper right hand corner.<br>" + 
+        treatmentPhrase;;
     
     document.getElementById('stop-btn-container').style.display = "block"; 
     
