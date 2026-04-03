@@ -115,9 +115,9 @@ function showTreatmentScreen() {
     
     // Câu trên màn hình giữa giờ (giữ nguyên bold như ý m muốn)
     if (assignedCondition === "Low") {
-        msgElement.innerHTML = `On average, Fulbright students in major ${userMajor} in cohort ${userCohort} earn <strong>24,600 VND</strong> in this round.`;
+        msgElement.innerHTML = `On average, Fulbright students in major ${userMajor} in cohort ${userCohort} earn <strong>30,600 VND</strong> in this round.`;
     } else if (assignedCondition === "High") {
-        msgElement.innerHTML = `On average, Fulbright students in major ${userMajor} in cohort ${userCohort} earn <strong>41,000 VND</strong> from this round.`;
+        msgElement.innerHTML = `On average, Fulbright students in major ${userMajor} in cohort ${userCohort} earn <strong>51,000 VND</strong> from this round.`;
     }
     
     showScreen('screen-treatment');
@@ -133,9 +133,9 @@ function startRound2() {
     // Tạo câu Treatment KHÔNG in đậm để gắn thẳng vào màn hình làm bài Part 2
     let treatmentPhrase = "";
     if (assignedCondition === "Low") {
-        treatmentPhrase = `On average, Fulbright students in major ${userMajor} in cohort ${userCohort} earn 33,000 VND in this round.<br>`;
+        treatmentPhrase = `On average, Fulbright students in major ${userMajor} in cohort ${userCohort} earn 30,600 VND in this round.<br>`;
     } else if (assignedCondition === "High") {
-        treatmentPhrase = `On average, Fulbright students in major ${userMajor} in cohort ${userCohort} earn 55,000 VND from this round.<br>`;
+        treatmentPhrase = `On average, Fulbright students in major ${userMajor} in cohort ${userCohort} earn 51,000 VND from this round.<br>`;
     }
 
     // Ghim trực tiếp câu treatment lên trên dòng hướng dẫn
